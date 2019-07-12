@@ -79,20 +79,12 @@ function checkRole(role) {
 }
 
 
-// authRoutes.get("/privatepage", ensureLogin.ensureLoggedIn(), (req, res) => {
-//   res.render("privateview/private", { user: req.user });
-// });
+
 authRoutes.get('/adminlistofusers', checkRole('ADMIN'), (req, res) => {
   res.render('adminview/listofusers', {user: req.user});
 });
 
-authRoutes.get('/uploadDocuments', checkRole('EDITOR'), (req, res) => {
-  res.render('editorview/uploadDocuments', {user: req.user});
-});
 
-// authRoutes.get('/uploadDocuments', checkRoleEDITOR('EDITOR'), (req, res) => {
-//   res.render('uploadview/uploadDocuments', {user: req.user});
-// });
 
 authRoutes.get("/logout", (req, res) => {
   req.logout();

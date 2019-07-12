@@ -102,6 +102,8 @@ const authRoute = require('./routes/auth-route');
 app.use('/', authRoute);
 const guestRoute = require('./routes/guest-route');
 app.use('/', guestRoute);
+const editorRoute = require('./routes/editor-route');
+app.use('/', editorRoute);
 
 
 module.exports = app;
