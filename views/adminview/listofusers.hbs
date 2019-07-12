@@ -1,0 +1,10 @@
+<p>you are in list of users page</p>
+<h4> ADMIN only</h4>
+{{#if user}}
+  <div>
+    <p>your username is: {{ user.username }}</p>
+    <p>your role is: {{ user.role }}</p>
+
+    <a href="/">Index</a>
+  </div>
+{{/if}}

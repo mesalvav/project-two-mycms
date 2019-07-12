@@ -8,11 +8,16 @@
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
-  <h2>
-    <a href="/logout">Log OUT</a> <span> |&nbsp;|</span>
-    <a href="/privatepage">TO private</a> <span> |&nbsp;|</span>
-  </h2>
+  <h4>
+    <a href="/adminlistofusers">TO list of users ADMIN</a> <span> |&nbsp;|</span>
+    <a href="/uploadDocuments">TO upload Documents ADMIN and EDITOR</a> <span> |&nbsp;|</span>
+  </h4>
   {{{body}}}
+  <h3>
+    <a href="/logout">Log OUT</a> <span> |&nbsp;|</span>
+     <a href="/login">TO Login</a> <span> |&nbsp;|</span>
+      <a href="/signup">TO sign up</a> <span> |&nbsp;|</span>
+    </h3>
   {{#if message}}
     <div class="error-message">{{ message }}</div>
   {{/if}}

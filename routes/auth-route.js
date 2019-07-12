@@ -67,23 +67,32 @@ authRoutes.post("/login", passport.authenticate("local", {
   passReqToCallback: true
 }));
 
-function checkRoles(role) {
+function checkRole(role) {
   return function(req, res, next) {
-    if (req.isAuthenticated() && req.user.role === role) {
+    // let permission = (req.user.role === role);
+    if (req.isAuthenticated() && (req.user.role === role || req.user.role === 'ADMIN')) {
       return next();
     } else {
       res.redirect('/login')
     }
   }
 }
+
+
 // authRoutes.get("/privatepage", ensureLogin.ensureLoggedIn(), (req, res) => {
 //   res.render("privateview/private", { user: req.user });
 // });
-authRoutes.get('/privatepage', checkRoles('ADMIN'), (req, res) => {
-  res.render('privateview/private', {user: req.user});
+authRoutes.get('/adminlistofusers', checkRole('ADMIN'), (req, res) => {
+  res.render('adminview/listofusers', {user: req.user});
 });
 
+authRoutes.get('/uploadDocuments', checkRole('EDITOR'), (req, res) => {
+  res.render('uploadview/uploadDocuments', {user: req.user});
+});
 
+// authRoutes.get('/uploadDocuments', checkRoleEDITOR('EDITOR'), (req, res) => {
+//   res.render('uploadview/uploadDocuments', {user: req.user});
+// });
 
 authRoutes.get("/logout", (req, res) => {
   req.logout();
