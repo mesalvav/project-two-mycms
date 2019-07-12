@@ -87,7 +87,7 @@ authRoutes.get('/adminlistofusers', checkRole('ADMIN'), (req, res) => {
 });
 
 authRoutes.get('/uploadDocuments', checkRole('EDITOR'), (req, res) => {
-  res.render('uploadview/uploadDocuments', {user: req.user});
+  res.render('editorview/uploadDocuments', {user: req.user});
 });
 
 // authRoutes.get('/uploadDocuments', checkRoleEDITOR('EDITOR'), (req, res) => {

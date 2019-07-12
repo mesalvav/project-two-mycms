@@ -100,6 +100,8 @@ const indexMain = require('./routes/index');
 app.use('/', indexMain);
 const authRoute = require('./routes/auth-route');
 app.use('/', authRoute);
+const guestRoute = require('./routes/guest-route');
+app.use('/', guestRoute);
 
 
 module.exports = app;
