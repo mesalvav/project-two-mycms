@@ -81,7 +81,15 @@ function checkRole(role) {
 
 
 authRoutes.get('/adminlistofusers', checkRole('ADMIN'), (req, res) => {
-  res.render('adminview/listofusers', {user: req.user});
+  User.find()
+  .then((arrayUsers)=>{
+
+    res.render('adminview/listofusers', {user: req.user, allUsers: arrayUsers});
+  })
+  .catch((err)=>{
+
+  })
+
 });
 
 
