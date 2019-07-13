@@ -87,7 +87,7 @@ authRoutes.get('/adminlistofusers', checkRole('ADMIN'), (req, res) => {
     res.render('adminview/listofusers', {user: req.user, allUsers: arrayUsers});
   })
   .catch((err)=>{
-
+      console.log("mi ERROR: " + err);
   })
 
 });

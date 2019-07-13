@@ -11,10 +11,20 @@ const guestRoutes = express.Router();
 // const passport = require("passport");
 //
 const ensureLogin = require("connect-ensure-login");
-
+const Folio = require('../models/Folio.js');
 
 guestRoutes.get("/listofdocuments", ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render("guestview/listofdocuments", { user: req.user });
+  Folio.find()
+  .then( arrayFolios => {
+    
+    res.render("guestview/listofdocuments", { user: req.user , allFolios: arrayFolios });
+
+  })
+  .catch(err=>{
+    console.log("MI ERROR: " + err);
+  });
+
+
 });
 
 module.exports = guestRoutes;
