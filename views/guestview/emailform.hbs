@@ -1,0 +1,21 @@
+<h1>NODEMAILER</h1>
+<form action="/sendfoliobyemail" method="POST">
+<div>
+
+  <label for="">Email</label>
+  <input type="email" name="email" id="">
+</div>
+<div>
+
+  <label for="">Subject</label>
+  <input type="text" name="subject" id="" value="{{ emailx.subject}}" style="width: 220px">
+</div>
+<div>
+
+  <label for="">Message</label>
+  <textarea type="text" name="message" id="" rows="5" cols="70" >
+    {{emailx.clickthis}} : {{ emailx.urllink}}
+  </textarea>
+</div>
+  <button type="submit">Submit</button>
+</form>

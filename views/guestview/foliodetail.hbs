@@ -1,0 +1,17 @@
+<h2> folio details page</h2>
+<h3>Title: {{ foliox.foliotitle}}</h3>
+<h4>Description: {{foliox.foliodescription}}</h4>
+
+<h5>
+  <a href="/emailform/{{ foliox._id}}">Email this Folio</a>
+</h5>
+<div>
+  <button id="prev">Previous</button>
+  <button id="next">Next</button>
+  &nbsp; &nbsp;
+  <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+</div>
+
+<canvas id="the-canvas"></canvas>
+
+<div id="foliourl" style="display: none;">{{foliox.foliopath}}</div>

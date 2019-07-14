@@ -11,8 +11,8 @@
 
 <div>
   {{#each allFolios}}
-    <div> username: {{this.foliotitle}}</div>
-    <div>role: {{this.foliodescription }}</div>
+    <div> <a href="/viewfolio/{{ this._id }}"> Title: {{this.foliotitle}}</a> </div>
+    <div>Description: {{this.foliodescription }}</div>
     <hr>
   {{/each}}
 </div>

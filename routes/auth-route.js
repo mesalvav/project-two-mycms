@@ -73,14 +73,14 @@ function checkRole(role) {
     if (req.isAuthenticated() && (req.user.role === role || req.user.role === 'ADMIN')) {
       return next();
     } else {
-      res.redirect('/login')
+      res.redirect('/login');
     }
   }
 }
 
 
 
-authRoutes.get('/adminlistofusers', checkRole('ADMIN'), (req, res) => {
+authRoutes.get('/adminlistofusers', checkRole('ADMIN'), (req, res) => { 
   User.find()
   .then((arrayUsers)=>{
 

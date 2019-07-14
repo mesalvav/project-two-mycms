@@ -13,6 +13,8 @@ const guestRoutes = express.Router();
 const ensureLogin = require("connect-ensure-login");
 const Folio = require('../models/Folio.js');
 
+var nodemailer = require('nodemailer');
+
 guestRoutes.get("/listofdocuments", ensureLogin.ensureLoggedIn(), (req, res) => {
   Folio.find()
   .then( arrayFolios => {
@@ -26,5 +28,61 @@ guestRoutes.get("/listofdocuments", ensureLogin.ensureLoggedIn(), (req, res) => 
 
 
 });
+
+guestRoutes.get("/viewfolio/:folioid", ensureLogin.ensureLoggedIn(), (req, res) => {
+  
+  Folio.findById(req.params.folioid)
+  .then( foliox=>{
+    
+    res.render("guestview/foliodetail", {foliox:foliox});
+  })
+  .catch(err=>{
+    console.log("errores from /viewfolio/:folioid  "+err);
+  });
+});
+
+guestRoutes.get("/emailform/:folioid", ensureLogin.ensureLoggedIn(), (req, res) => {
+  
+  Folio.findById(req.params.folioid)
+  .then( foliox=>{
+    let subject = "In regards to Folio: " + foliox.foliotitle;
+    let clickthis = "To see Folio click this link: ";
+    let urllink = foliox.foliopath;
+    let emailx = {subject: subject, clickthis: clickthis, urllink: urllink};
+
+    res.render("guestview/emailform", {emailx: emailx});
+  })
+  .catch(err=>{
+    console.log("errores from GET /emailform/:folioid  "+ err);
+  });
+});
+
+
+guestRoutes.post("/sendfoliobyemail", ensureLogin.ensureLoggedIn(), (req, res) => {
+  let { email, subject, message } = req.body;
+
+  let transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: process.env.GMAILUSER,
+      pass: process.env.GMAILPASSWORD
+    }
+  });
+
+  transporter.sendMail({
+    from: '"My Awesome Project 👻" <myawesome@project.com>',
+    to: email, 
+    subject: subject, 
+    text: message,
+    html: `<b>${message}</b>`
+  })
+  .then(info => {
+
+    console.log( 'email: ' + email +  'subject: ' + subject);
+    res.redirect('/listofdocuments');
+  })
+  .catch(error => console.log("error from POST  sendfoliobyemail  " + error));
+})
+
 
 module.exports = guestRoutes;
