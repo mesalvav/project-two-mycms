@@ -12,7 +12,7 @@ const guestRoutes = express.Router();
 //
 const ensureLogin = require("connect-ensure-login");
 const Folio = require('../models/Folio.js');
-
+const Comment = require('../models/Comment.js')
 var nodemailer = require('nodemailer');
 
 guestRoutes.get("/listofdocuments", ensureLogin.ensureLoggedIn(), (req, res) => {
@@ -87,8 +87,26 @@ guestRoutes.post("/sendfoliobyemail", ensureLogin.ensureLoggedIn(), (req, res) =
 
 guestRoutes.post("/commentthispage", ensureLogin.ensureLoggedIn(), (req, res) => {
   console.log(" from  commentthispage " + JSON.stringify( req.body));
-  // res.redirect("/listofdocuments");
-    res.redirect("/viewfolio/"+ req.body.folioid +"/" + req.body.pagenumber);
+    const  commentcontent = req.body.commentcontent;
+    const commenteddocument = req.body.folioid;
+    const pagenumber = req.body.pagenumber;
+    const commentcreatedby = req.user._id;
+
+
+    const newComment= Comment({pagenumber: pagenumber,
+                              commentcontent:commentcontent,
+                              commentcreatedby: commentcreatedby,
+                              commenteddocument: commenteddocument
+                            })
+    
+    newComment.save()
+    .then( commentx=> {
+      res.redirect("/viewfolio/"+ req.body.folioid +"/" + req.body.pagenumber);
+
+    })
+    .catch(err=>{
+      console.err("my comment err: " + err);
+    })
  })
 
 module.exports = guestRoutes;

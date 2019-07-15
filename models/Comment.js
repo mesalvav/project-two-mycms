@@ -11,6 +11,6 @@ const commentSchema = new Schema({
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
 
-const Folio = mongoose.model("Folio", folioSchema);
+const Comment = mongoose.model("Comment", commentSchema);
 
-module.exports = Folio;
+module.exports = Comment;

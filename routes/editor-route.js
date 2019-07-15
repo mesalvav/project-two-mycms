@@ -40,6 +40,7 @@ editorRoutes.post('/uploadDocument', uploadCloud.single('thefiletoupload') , (re
   const foliopath = req.file.url;
   const folioname = req.file.originalname;
   const foliocreatedby = req.user._id;
+  
   const newFolio = Folio({  foliotitle: foliotitle,
                             foliodescription: foliodescription,
                             foliocreatedby: foliocreatedby,
