@@ -8,9 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
       let url = foliourl.innerHTML;
       // The workerSrc property shall be specified.
       // pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+      let pagetoview = Number( document.getElementById('pagetoview').innerHTML);
+      
+      console.log("page to vieW AFter commenting" + pagetoview);
 
       var pdfDoc = null,
-          pageNum = 1,
+          pageNum = pagetoview,
           pageRendering = false,
           pageNumPending = null,
           scale = 0.8,
@@ -49,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update page counters
             document.getElementById('page_num').textContent = num;
+            document.getElementById('viewedpage').value = num;
+
           }
       //
         /**

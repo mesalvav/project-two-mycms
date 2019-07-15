@@ -29,12 +29,13 @@ guestRoutes.get("/listofdocuments", ensureLogin.ensureLoggedIn(), (req, res) => 
 
 });
 
-guestRoutes.get("/viewfolio/:folioid", ensureLogin.ensureLoggedIn(), (req, res) => {
-  
+guestRoutes.get("/viewfolio/:folioid/:viewedpage", ensureLogin.ensureLoggedIn(), (req, res) => {
+  console.log("viewed page: " + req.params.viewedpage);
+
   Folio.findById(req.params.folioid)
   .then( foliox=>{
     
-    res.render("guestview/foliodetail", {foliox:foliox});
+    res.render("guestview/foliodetail", {foliox:foliox, pagetoview: req.params.viewedpage});
   })
   .catch(err=>{
     console.log("errores from /viewfolio/:folioid  "+err);
@@ -84,5 +85,10 @@ guestRoutes.post("/sendfoliobyemail", ensureLogin.ensureLoggedIn(), (req, res) =
   .catch(error => console.log("error from POST  sendfoliobyemail  " + error));
 })
 
+guestRoutes.post("/commentthispage", ensureLogin.ensureLoggedIn(), (req, res) => {
+  console.log(" from  commentthispage " + JSON.stringify( req.body));
+  // res.redirect("/listofdocuments");
+    res.redirect("/viewfolio/"+ req.body.folioid +"/" + req.body.pagenumber);
+ })
 
 module.exports = guestRoutes;

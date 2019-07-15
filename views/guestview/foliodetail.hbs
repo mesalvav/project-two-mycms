@@ -10,6 +10,15 @@
   <button id="next">Next</button>
   &nbsp; &nbsp;
   <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+  &nbsp;&nbsp; 
+  <form action="/commentthispage" method="POST">
+    <input type="text" value="comment goes here" name="commentcontent">
+    <input style="display:none;" type="text" name="folioid" value="{{foliox._id}}">
+    <input style="display:none;" id="viewedpage" type="text"  name="pagenumber"> 
+    <div  id="pagetoview" type="text"  name="pagetoview"> {{pagetoview}}</div>
+
+    <button>Comment this page</button>
+  </form>
 </div>
 
 <canvas id="the-canvas"></canvas>
