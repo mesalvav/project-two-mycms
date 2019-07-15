@@ -111,26 +111,54 @@ guestRoutes.post("/commentthispage", ensureLogin.ensureLoggedIn(), (req, res) =>
 
  guestRoutes.get("/allcommentsforfolio/:folioid", ensureLogin.ensureLoggedIn(), (req, res) => {
     
-  console.log("============>>>>>> +++  is editor: " + req.user.role);
-    Comment.find().populate('commenteddocument')
+  let isEditor = false;
+  if (req.user.role === 'EDITOR') {
+    console.log("============>>>>>> +++  is editor: " + req.user.role);
+    isEditor = true;
+  }
+    Comment.find().populate(['commenteddocument','commentcreatedby'])
     .then((allComments)=>{
-      
-      const filteredComments = allComments.filter( (eachComment)=>{ 
-        const isUserAndFolio = eachComment.commenteddocument.equals(req.params.folioid)
-                                && eachComment.commentcreatedby.equals(req.user._id);
-        return isUserAndFolio;
-      });
-        console.log("more than 1 " + filteredComments.length);
-      if (filteredComments.length > 0){
-         
-        // console.log("filtered comments: " + filteredComments);
-        res.render("guestview/allcommentsforfolio", 
-                      {filteredComments: filteredComments, foliox: filteredComments[0].commenteddocument});
-      } else {
-        res.render("guestview/allcommentsforfolio", {noComments: true, folioid: req.params.folioid});
-      }
-        
+      if (isEditor > 0) {
+        const filteredComments = allComments.filter( (eachComment)=>{ 
+          const isUserAndFolio = eachComment.commenteddocument._id.equals(req.params.folioid);                      
+          return isUserAndFolio;
+        });
+          console.log("more than 1 " + filteredComments.length);
 
+        if (filteredComments.length > 0){
+          res.render("editorview/allcommentsforfolioEditorVersion", 
+          {  filteredComments: filteredComments,
+            foliox: filteredComments[0].commenteddocument
+            
+            });
+        } else {
+          res.render("editorview/allcommentsforfolioEditorVersion", 
+          {noComments: true, folioid: req.params.folioid}
+          );
+        }
+        
+      } else {
+
+          const filteredComments = allComments.filter( (eachComment)=>{ 
+            const isUserAndFolio = eachComment.commenteddocument._id.equals(req.params.folioid)
+                                    && eachComment.commentcreatedby.equals(req.user._id);
+            return isUserAndFolio;
+          });
+            console.log("more than 1 " + filteredComments.length);
+
+          if (filteredComments.length > 0){
+            
+            // console.log("filtered comments: " + filteredComments);
+            res.render("guestview/allcommentsforfolio", 
+                          {  filteredComments: filteredComments,
+                            foliox: filteredComments[0].commenteddocument
+                             
+                            });
+          } else {
+            res.render("guestview/allcommentsforfolio", {noComments: true, folioid: req.params.folioid});
+          }
+        
+      }
 
 
        
