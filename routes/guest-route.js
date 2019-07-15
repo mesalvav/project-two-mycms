@@ -109,4 +109,24 @@ guestRoutes.post("/commentthispage", ensureLogin.ensureLoggedIn(), (req, res) =>
     })
  })
 
+ guestRoutes.get("/allcommentsforfolio/:folioid", ensureLogin.ensureLoggedIn(), (req, res) => {
+    Comment.find().populate('commenteddocument')
+    .then((allComments)=>{
+
+        const filteredComments = allComments.filter( (eachComment)=>{ 
+            const isUserAndFolio = eachComment.commenteddocument.equals(req.params.folioid)
+                                    && eachComment.commentcreatedby.equals(req.user._id);
+            return isUserAndFolio;
+        });
+
+        console.log("filtered comments: " + filteredComments);
+        res.render("guestview/allcommentsforfolio", 
+                      {filteredComments: filteredComments, foliox: filteredComments[0].commenteddocument});
+    })
+    .catch(err=>{
+      console.log("err from allcommentsforfolio " + err);
+    });
+
+});
+
 module.exports = guestRoutes;
