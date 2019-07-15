@@ -1,0 +1,7 @@
+<h1>this is the edit PAGE</h1>
+<form action="/editcomment/{{ commentx._id}}/{{commentx.commenteddocument._id }}" method="POST">
+  <div> Folio title:  {{ commentx.commenteddocument.foliotitle}}</div>
+  <input type="text" value="{{ commentx.commentcontent}}" name="commentcontent">
+
+  <button>Comment this page</button>
+</form>

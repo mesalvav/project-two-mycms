@@ -110,23 +110,75 @@ guestRoutes.post("/commentthispage", ensureLogin.ensureLoggedIn(), (req, res) =>
  })
 
  guestRoutes.get("/allcommentsforfolio/:folioid", ensureLogin.ensureLoggedIn(), (req, res) => {
+    
+  console.log("============>>>>>> +++  is editor: " + req.user.role);
     Comment.find().populate('commenteddocument')
     .then((allComments)=>{
-
-        const filteredComments = allComments.filter( (eachComment)=>{ 
-            const isUserAndFolio = eachComment.commenteddocument.equals(req.params.folioid)
-                                    && eachComment.commentcreatedby.equals(req.user._id);
-            return isUserAndFolio;
-        });
-
-        console.log("filtered comments: " + filteredComments);
+      
+      const filteredComments = allComments.filter( (eachComment)=>{ 
+        const isUserAndFolio = eachComment.commenteddocument.equals(req.params.folioid)
+                                && eachComment.commentcreatedby.equals(req.user._id);
+        return isUserAndFolio;
+      });
+        console.log("more than 1 " + filteredComments.length);
+      if (filteredComments.length > 0){
+         
+        // console.log("filtered comments: " + filteredComments);
         res.render("guestview/allcommentsforfolio", 
                       {filteredComments: filteredComments, foliox: filteredComments[0].commenteddocument});
+      } else {
+        res.render("guestview/allcommentsforfolio", {noComments: true, folioid: req.params.folioid});
+      }
+        
+
+
+
+       
     })
     .catch(err=>{
       console.log("err from allcommentsforfolio " + err);
     });
 
 });
+
+guestRoutes.get("/editcomment/:commentid", ensureLogin.ensureLoggedIn(), (req, res) => {
+  Comment.findById(req.params.commentid).populate('commenteddocument')
+  .then(commentx=>{
+    res.render("guestview/editcomment",{commentx: commentx});
+  })
+  .catch(err=>{
+    console.log("err in editcomment " + err);
+  });
+});
+
+guestRoutes.post("/editcomment/:commentid/:folioid", ensureLogin.ensureLoggedIn(), (req, res) => {
+  const folioid = req.params.folioid;
+  const commentcontent = req.body.commentcontent;
+  Comment.update({_id: req.params.commentid}, {$set: {commentcontent}})
+  .then(commentx=>{
+    res.redirect("/allcommentsforfolio/" + folioid);
+    // res.render("guestview/editcomment",{commentx: commentx});
+  })
+  .catch(err=>{
+    console.log("err in editcomment " + err);
+  });
+});
+
+guestRoutes.post("/deletecomment/:commentid/:folioid", ensureLogin.ensureLoggedIn(), (req, res) => {
+  const folioid = req.params.folioid;
+  const commentid = req.params.commentid;
+  
+  console.log(">>>>>>>>>> =======  ==== > from delete comment " + commentid);
+
+  Comment.findByIdAndRemove(commentid)
+  .then (()=>{
+    console.log("remove removed ====++++");
+    res.redirect("/allcommentsforfolio/" + folioid);
+  })
+  .catch(err=>{
+    console.log("err from delete comment " + err);
+  });
+});
+
 
 module.exports = guestRoutes;

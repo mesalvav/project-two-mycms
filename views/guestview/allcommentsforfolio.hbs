@@ -1,7 +1,19 @@
+<a href="/listofdocuments">Back ALL Folios</a> 
 <h1>all comments for folio page : <a href="/viewfolio/{{ foliox._id}}/1">{{ foliox.foliotitle}}</a> </h1>
 
 {{#each filteredComments}}
 <div>page#: {{pagenumber}}</div>
 <div>comment:</div>
 <div>{{ commentcontent }}</div>
+<a href="/editcomment/{{ this._id}}">  EDIT</a>
+ <form action="/deletecomment/{{this._id}}/{{this.commenteddocument._id }}" method="POST">
+    <button>Delete This Comment</button>
+  </form>
+<hr>
+
 {{/each}}
+
+{{#if noComments}}
+  <h3>Comments not Found!</h3>
+  <a href="/viewfolio/{{ folioid }}/1"> BACK to folio</a>
+{{/if}}
