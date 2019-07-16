@@ -62,8 +62,7 @@ app.use(session({
   saveUninitialized: true
 }))
 //
-app.use(passport.initialize());
-app.use(passport.session());
+
 //
 passport.serializeUser((user, cb) => {
   cb(null, user._id);
@@ -86,7 +85,7 @@ passport.use(new LocalStrategy({
     }
     if (!user) {
       return next(null, false, { message: "Incorrect username" });
-    }
+    } 
     if (!bcrypt.compareSync(password, user.password)) {
       return next(null, false, { message: "Incorrect password" });
     }
@@ -95,6 +94,17 @@ passport.use(new LocalStrategy({
   });
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// app.use((req, res, next) => {
+//   res.locals.currentUser = req.user;
+//   res.locals.message = req.flash('error');
+//   // res.locals.yay = req.flash('success');
+  
+//   next();
+// });
 
 const indexMain = require('./routes/index');
 app.use('/', indexMain);

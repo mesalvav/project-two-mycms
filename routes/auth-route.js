@@ -24,7 +24,7 @@ authRoutes.post("/signup", (req, res, next) => {
   if (username === "" || password === "") {
     res.render("authview/signup", { message: "Indicate username and password" });
     return;
-  }
+  } 
 
   User.findOne({ username })
   .then(user => {
@@ -46,7 +46,7 @@ authRoutes.post("/signup", (req, res, next) => {
       if (err) {
         res.render("authview/signup", { message: "Something went wrong" });
       } else {
-        res.redirect("/");
+        res.redirect("/listofdocuments");
       }
     });
 
@@ -58,11 +58,11 @@ authRoutes.post("/signup", (req, res, next) => {
 
 // log in ...
 authRoutes.get("/login", (req, res, next) => {
-  res.render("authview/login");
+  res.render("authview/login",  { "message": req.flash("error")});
 });
 
 authRoutes.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
+  successRedirect: "/listofdocuments",
   failureRedirect: "/login",
   failureFlash: true,
   passReqToCallback: true

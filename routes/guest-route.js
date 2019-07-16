@@ -29,6 +29,23 @@ guestRoutes.get("/listofdocuments", ensureLogin.ensureLoggedIn(), (req, res) => 
 
 });
 
+guestRoutes.post("/listofdocumentswithsearch", ensureLogin.ensureLoggedIn(), (req, res) => {
+
+  console.log("from /listofdocumentswithsearch " + req.body.termtosearch);
+  const term = req.body.termtosearch;
+  Folio.find({$text: {$search: term}})
+  .then( arrayFolios => {
+    
+
+    res.render("guestview/listofdocuments", { user: req.user , allFolios: arrayFolios });
+
+  })
+  .catch(err=>{
+    console.log("MI ERROR: " + err);
+  });
+
+});
+
 guestRoutes.get("/viewfolio/:folioid/:viewedpage", ensureLogin.ensureLoggedIn(), (req, res) => {
   console.log("viewed page: " + req.params.viewedpage);
  const isNotEditor = req.user.role !== 'EDITOR';

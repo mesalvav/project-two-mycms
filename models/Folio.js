@@ -12,6 +12,15 @@ const folioSchema = new Schema({
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
 
+folioSchema.index({
+  foliotitle: 'text',
+  foliodescription: 'text'
+},{ weights: {
+      foliotitle: 3,
+      foliodescription:1,
+},
+});
+
 const Folio = mongoose.model("Folio", folioSchema);
 
 module.exports = Folio;
