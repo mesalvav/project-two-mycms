@@ -35,7 +35,8 @@ authRoutes.post("/signup", (req, res, next) => {
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
-
+    
+    
     const newUser = new User({
       username,
       password: hashPass
@@ -81,8 +82,28 @@ function checkRole(role) {
 
 
 authRoutes.get('/adminlistofusers', checkRole('ADMIN'), (req, res) => { 
+  // const mysalt = bcrypt.genSaltSync(bcryptSalt);
+  // hashPassSuper = bcrypt.hashSync('yosoysuper', mysalt);
+
+
   User.find()
   .then((arrayUsers)=>{
+    
+    arrayUsers.forEach(userx=>{
+      if (userx.role === 'ADMIN') {
+        console.log("locale compare password " + 'superadmin'.localeCompare(userx.username) === 0);
+        if ('superadmin'.localeCompare(userx.username) === 0) {
+          userx.roleSuper = true;
+        }
+        
+        userx.roleAdmin = true;
+      } else if (userx.role === 'EDITOR'){
+        userx.roleEditor = true;
+      }
+       else {
+         userx.roleGuest = true;
+       }
+    });
 
     res.render('adminview/listofusers', {user: req.user, allUsers: arrayUsers});
   })
@@ -104,6 +125,24 @@ authRoutes.get("/logout", (req, res, next) => {
   req.logout();
     
       res.redirect("/login"); 
+  });
+
+
+  authRoutes.post('/updaterole/:userid', checkRole('ADMIN'), (req, res) => { 
+   // User.findByIdAndUpdate()
+   console.log("from POST update req.body " + JSON.stringify(req.body));
+
+    User.update({_id: req.params.userid}, {$set:{
+      role: req.body.role
+    }})
+    .then( (userx)=>{
+
+      res.redirect("/adminlistofusers");
+    })
+    .catch( (err)=>{
+      console.log("from POST err is: " + err);
+    })
+
   });
 
 module.exports = authRoutes;

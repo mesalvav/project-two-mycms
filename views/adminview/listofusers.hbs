@@ -10,8 +10,43 @@
 
 <div>
   {{#each allUsers}}
+
+  {{#if this.roleGuest}}
     <div> username: {{this.username}}</div>
     <div>role: {{this.username }}</div>
+    <form method="POST" action="/updaterole/{{this._id}}" >
+      <input type="radio" name="role" value="GUEST" checked>Guest <br>
+      <input type="radio" name="role" value="EDITOR">Editor<br>
+      <input type="radio" name="role" value="ADMIN"> Admin
+      <input type="submit" class="btn btn-primary" value="Update role">
+    </form>
     <hr>
+  {{/if}}
+  {{#if this.roleEditor}}
+    <div> username: {{this.username}}</div>
+    <div>role: {{this.username }}</div>
+    <form method="POST" action="/updaterole/{{this._id}}">
+      <input type="radio" name="role" value="GUEST" >Guest <br>
+      <input type="radio" name="role" value="EDITOR" checked>Editor<br>
+      <input type="radio" name="role" value="ADMIN"> Admin
+      <input type="submit" class="btn btn-primary" value="Update role">
+    </form>
+    <hr>
+  {{/if}}
+  {{#if this.roleAdmin}}
+    <div> username: {{this.username}}</div>
+    <div>role: {{this.username }}</div>
+    <form method="POST" action="/updaterole/{{this._id}}">
+      <input type="radio" name="role" value="GUEST" >Guest <br>
+      <input type="radio" name="role" value="EDITOR" >Editor<br>
+      <input type="radio" name="role" value="ADMIN" checked> Admin
+      {{#unless this.roleSuper}}
+      <input type="submit" class="btn btn-primary" value="Update role">
+      {{/unless}}
+    </form>
+    
+    <hr>
+  {{/if}}
+      
   {{/each}}
 </div>
