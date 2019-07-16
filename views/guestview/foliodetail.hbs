@@ -15,12 +15,19 @@
   <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
   &nbsp;&nbsp; 
   <form action="/commentthispage" method="POST">
-    <input type="text" value="comment goes here" name="commentcontent">
-    <input style="display:none;" type="text" name="folioid" value="{{foliox._id}}">
     <input style="display:none;" id="viewedpage" type="text"  name="pagenumber"> 
     <div  style="display:none;" id="pagetoview" type="text"  name="pagetoview"> {{pagetoview}}</div>
+    <input style="display:none;" type="text" name="folioid" value="{{foliox._id}}">
 
+  {{#if isNotEditor}}
+    <input type="text" value="comment goes here" name="commentcontent">
     <button>Comment this page</button>
+  {{/if}}
+  {{#unless isNotEditor}}
+    <div> I am editor will edit page </div>
+    <a href="/editfolio/{{ foliox._id}}">Edit this Folio</a>
+
+  {{/unless}}
   </form>
 </div>
 

@@ -28,6 +28,7 @@ function checkRole(role) {
 editorRoutes.get('/uploadDocuments', checkRole('EDITOR'), (req, res) => {
   res.render('editorview/uploadDocuments', {user: req.user});
 });
+
 // checkRole('EDITOR')
 editorRoutes.post('/uploadDocument', uploadCloud.single('thefiletoupload') , (req, res, next) => {
 
@@ -55,6 +56,43 @@ editorRoutes.post('/uploadDocument', uploadCloud.single('thefiletoupload') , (re
     console.log('my ERRor: ' + err);
   })     
   // res.render('guestview/listofdocuments', {user: req.user});
+});
+
+editorRoutes.get("/editfolio/:folioid", checkRole('EDITOR'), (req, res) => {
+  Folio.findById(req.params.folioid)
+  .then(foliox=>{
+    res.render("editorview/editfolio",{foliox: foliox});
+  })
+  .catch(err=>{
+    console.log("err in edit folio/:folioid" + err);
+  });
+});
+
+editorRoutes.post("/editfolio/:folioid", uploadCloud.single('thefiletoupload'), (req, res) => {
+  const folioid = req.params.folioid;
+  const { foliotitle,
+    foliodescription
+  } = req.body;
+
+  const foliopath = req.file.url;
+  const folioname = req.file.originalname;
+  const foliocreatedby = req.user._id;
+
+  Folio.update({_id: req.params.folioid}, {$set: {
+      foliotitle: foliotitle,
+      foliodescription: foliodescription,
+      foliocreatedby: foliocreatedby,
+      folioname: folioname,
+      foliopath: foliopath
+    
+  }})
+  .then((foliox)=>{
+    res.redirect("/viewfolio/" + folioid + "/1");
+    
+  })
+  .catch(err=>{
+    console.log("err in editfolio / :folioid " + err);
+  });
 });
 
 module.exports = editorRoutes;
