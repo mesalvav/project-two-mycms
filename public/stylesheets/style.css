@@ -17,4 +17,16 @@ a {
 .aboveForm {
   height: 70px; }
 
+input {
+  text-align: center; }
+
+.imageLogSignup {
+  position: fixed;
+  width: 100%;
+  opacity: 0.75; }
+
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0; }
+
 /*# sourceMappingURL=style.css.map */

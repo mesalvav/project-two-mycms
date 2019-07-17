@@ -1,19 +1,37 @@
-<h2>Signup Page</h2>
+<div class="row">
+
+<div class="col-12">
+      <img src="/images/skydawn.jpeg" class="imageLogSignup"  alt="">
+
+ </div>
+</div>
+
+<div class="row aboveForm"></div>
+<div class="row">
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
+  
+<h3 class="text-center">Sign UP to Paperhack</h3>
 
 <form action="/signup" method="POST" >
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
+  <div class="form-group text-center">
+    <label for="exampleInputEmail1">Username</label>
     <input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
     <small id="emailHelp" class="form-text text-muted">We'll never share your data with anyone else.</small>
   </div>
-  <div class="form-group">
+  <div class="form-group text-center">
     <label for="exampleInputPassword1">Password</label>
     <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
-  
+  <div class="form-group text-center">
   <button type="submit" class="btn btn-primary">Create Account</button>
+
+  </div>
   <p class="">
     Do you already have an account?
     <a href="/login">Login</a>
   </p>
+  {{#if message}}
+    <div class="alert alert-danger" role="alert">{{ message }}</div>
+  {{/if}} 
 </form>
