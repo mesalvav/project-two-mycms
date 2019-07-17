@@ -1,8 +1,32 @@
 body {
-  padding: 50px;
+  padding: 1px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+#bodyLayout {
+  background-color: rgb(243, 235, 235);
+}
+
+.navbarSpace {
+  height: 57px;
+}
+
+// .IndexPageRow {
+//   width: 100%;
+//   background-image: url("../images/paperless-office.jpg");
+//   background-repeat: no-repeat;
+//   background-size: contain;
+// }
+
+.backImage {
+  
+  width:100%;
+}
+
+.aboveForm {
+  height: 70px;
 }

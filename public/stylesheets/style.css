@@ -1,8 +1,20 @@
 body {
-  padding: 50px;
+  padding: 1px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
   color: #00B7FF; }
+
+#bodyLayout {
+  background-color: #f3ebeb; }
+
+.navbarSpace {
+  height: 57px; }
+
+.backImage {
+  width: 100%; }
+
+.aboveForm {
+  height: 70px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -8,22 +8,66 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <title>{{title}}</title>
+  <!-- icons -->
+  <script src="https://kit.fontawesome.com/8ae8125fb4.js"></script>
+    {{!-- <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css"> --}}
+    {{!-- <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css"> --}}
+
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
-<body>
-  <h4>
+<body id="bodyLayout">
+
+  <nav class="navbar navbar-dark bg-primary navbar-expand-sm fixed-top">
+        <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand mr-auto" href="/"><img src="/images/scroll152.png" height="30" width="41">Paperhack</a>
+            <div class="collapse navbar-collapse" id="Navbar">
+                <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="/signup">Username: with Role:</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/signup"><span class="fas fa-user-plus"></span>Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login"><span class="fas fa-sign-in-alt"></span>Log In</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/logout"><span class="fas fa-sign-out-alt"></span>Log Out</a></li>
+                       {{!-- <li class="nav-item active"><a class="nav-link" href="#"><span class="fa fa-home fa-lg"></span> Home</a></li>
+                         <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span class="fa fa-info fa-lg"></span> About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span> Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./contactus.html"><span class="fa fa-address-card fa-lg"></span> Contact</a></li> --}}
+                </ul>
+
+                {{!-- <span class="navbar-text ml-auto">
+                    <a data-toggle="modal" data-target="#loginModal">
+                    <span class="fa fa-sign-in"></span> Login</a>
+                    <a id="loginAtag">
+                    <span class="fa fa-sign-in"></span> Login</a>
+                </span> --}}
+            </div>         
+        </div>
+    </nav>
+
+ 
+    
+
+  {{!-- <h4>
     <a href="/adminlistofusers">TO list of users ADMIN</a> <span> |&nbsp;|</span>
     <a href="/uploadDocuments">TO upload Documents ADMIN and EDITOR</a> <span> |&nbsp;|</span>
     <a href="/listofdocuments">TO list of Documents ALL ROLES</a> <span> |&nbsp;|</span>
-  </h4>
-  {{{body}}}
-  <h3>
+  </h4> --}}
+  <div class="navbarSpace"></div>
+  <div class="container-fluid">
+
+     {{{body}}}
+  </div>
+  
+ 
+  
+  {{!-- <h3>
     <a href="/logout">Log OUT</a> <span> |&nbsp;|</span>
      <a href="/login">TO Login</a> <span> |&nbsp;|</span>
       <a href="/signup">TO sign up</a> <span> |&nbsp;|</span>
       <a href="/">TO HOME page</a> <span> |&nbsp;|</span>
 
-    </h3>
+    </h3> --}}
   {{#if message}}
     <div class="alert alert-danger" role="alert">{{ message }}</div>
   {{/if}} 
