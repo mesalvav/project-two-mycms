@@ -37,10 +37,10 @@
     <div> username: {{this.username}}</div>
     <div>role: {{this.username }}</div>
     <form method="POST" action="/updaterole/{{this._id}}">
-      <input type="radio" name="role" value="GUEST" >Guest <br>
-      <input type="radio" name="role" value="EDITOR" >Editor<br>
       <input type="radio" name="role" value="ADMIN" checked> Admin
       {{#unless this.roleSuper}}
+      <input type="radio" name="role" value="GUEST" >Guest <br>
+      <input type="radio" name="role" value="EDITOR" >Editor<br>
       <input type="submit" class="btn btn-primary" value="Update role">
       {{/unless}}
     </form>
