@@ -153,7 +153,7 @@ guestRoutes.post("/commentthispage", ensureLogin.ensureLoggedIn(), (req, res) =>
             });
         } else {
           res.render("editorview/allcommentsforfolioEditorVersion", 
-          {noComments: true, folioid: req.params.folioid}
+          {noComments: true, folioid: req.params.folioid, foliox: allComments[0].commenteddocument}
           );
         }
         
@@ -175,7 +175,7 @@ guestRoutes.post("/commentthispage", ensureLogin.ensureLoggedIn(), (req, res) =>
                              
                             });
           } else {
-            res.render("guestview/allcommentsforfolio", {noComments: true, folioid: req.params.folioid});
+            res.render("guestview/allcommentsforfolio", {noComments: true, folioid: req.params.folioid, foliox: allComments[0].commenteddocument});
           }
         
       }

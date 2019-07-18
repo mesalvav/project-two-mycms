@@ -41,9 +41,17 @@ input {
   position: fixed;
   width:100%;
   opacity: 0.75;
+  
 }
 
 .container-fluid {
   padding-left: 0;
   padding-right: 0;
+}
+
+.titleInimageIndex {
+  position: absolute;
+  top: 200px;
+  left: 750px;
+  z-index: 900;
 }

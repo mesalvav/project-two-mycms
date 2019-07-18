@@ -29,4 +29,10 @@ input {
   padding-left: 0;
   padding-right: 0; }
 
+.titleInimageIndex {
+  position: absolute;
+  top: 200px;
+  left: 750px;
+  z-index: 900; }
+
 /*# sourceMappingURL=style.css.map */

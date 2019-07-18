@@ -1,4 +1,53 @@
-<h1>this edit form folio filled</h1>
+
+<div class="row">
+
+<div class="col-12">
+      <img src="/images/skydawn.jpeg" class="imageLogSignup"  alt="">
+
+ </div>
+</div>
+
+<div class="row aboveForm"></div>
+<div class="row">
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
+  
+<h3 class="text-center">EDIT DOCUMENT</h3>
+
+<form action="/editfolio/{{foliox._id}}" method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="exampleInputEmail1">title of folio</label>
+    <input name="foliotitle" type="text" class="form-control" id="exampleInputEmail1" value="{{foliox.foliotitle}}">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Description: </label>
+    <input name="foliodescription" type="text" class="form-control" id="exampleInputPassword1" value="{{foliox.foliodescription}}">
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputPassword1">Edit Folio</label>
+    <input name="thefiletoupload" type="file" class="form-control" id="exampleInputPassword1" >
+  </div>
+  
+  
+  <button type="submit" class="btn btn-primary">Upload Folio</button>&nbsp;<a href="/viewfolio/{{ foliox.id }}/1"> BACK to folio</a>
+  
+</form>
+  
+ 
+</div>
+<div class="col-sm-4">
+  
+</div>
+
+</div>
+
+
+
+
+
+{{!-- ======++++===== --}}
+{{!-- <h1>this edit form folio filled</h1>
 <form action="/editfolio/{{foliox._id}}" method="POST" enctype="multipart/form-data">
   <div class="form-group">
     <label for="exampleInputEmail1">title of folio</label>
@@ -17,4 +66,4 @@
   
   <button type="submit" class="btn btn-primary">Upload Folio</button>
   
-</form>
+</form> --}}

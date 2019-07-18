@@ -145,4 +145,21 @@ authRoutes.get("/logout", (req, res, next) => {
 
   });
 
+
+  authRoutes.post("/deleteuser/:userid", ensureLogin.ensureLoggedIn(), (req, res) => {
+    const userid = req.params.userid;
+   
+    
+    console.log(">>>>>>>>>> =======  ==== > from delete user " + userid);
+  
+    User.findByIdAndRemove(userid)
+    .then (()=>{
+      console.log("remove removed User ====++++");
+      res.redirect("/adminlistofusers");
+    })
+    .catch(err=>{
+      console.log("err from delete User " + err);
+    });
+  });
+
 module.exports = authRoutes;

@@ -1,14 +1,48 @@
-<h1>Upload page</h1>
-<h2>Editors and ADMIN only</h2>
-{{#if user}}
-  <div>
-    <p>your username is: {{ user.username }}</p>
-    <p>your role is: {{ user.role }}</p>
+<div class="row">
 
+<div class="col-12">
+      <img src="/images/skydawn.jpeg" class="imageLogSignup"  alt="">
+
+ </div>
+</div>
+
+<div class="row aboveForm"></div>
+<div class="row">
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
+  
+<h3 class="text-center">UPLOAD DOCUMENT</h3>
+
+<form action="/uploadDocument" method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Title: </label>
+    <input name="foliotitle" type="text" class="form-control" id="exampleInputEmail1" value="{{foliox.foliotitle}}">
   </div>
-{{/if}}
+  <div class="form-group">
+    <label for="exampleInputPassword1">Description: </label>
+    <input name="foliodescription" type="text" class="form-control" id="exampleInputPassword1" value="{{foliox.foliodescription}}">
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputPassword1">Upload Document</label>
+    <input name="thefiletoupload" type="file" class="form-control" id="exampleInputPassword1" >
+  </div>
+  
+  
+  <button class="btn btn-primary" type="submit" class="btn btn-primary">Upload Folio</button>&nbsp;<a href="/viewfolio/{{ foliox.id }}/1"> BACK to folio</a>
+  
+</form>
+  
+ 
+</div>
+<div class="col-sm-4">
+  
+</div>
 
-<div></div>
+</div>
+
+{{!-- 
+
 
 <form action="/uploadDocument"  method="POST" enctype="multipart/form-data">
   <div class="form-group">
@@ -28,4 +62,4 @@
   
   <button type="submit" class="btn btn-primary">Upload Folio</button>
   
-</form>
+</form> --}}

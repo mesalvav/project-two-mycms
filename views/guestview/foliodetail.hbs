@@ -1,9 +1,15 @@
-<div class="row my-3">
-  <div class="col-sm-2 col-12"></div>
-  <div class="col-sm-2 col-12 my-2">
-    <a href="#" class="btn" style="font-size: 1.2rem" disabled>Title: {{ foliox.foliotitle}}</a>
-    
+<div class="row">
+  <div class="col-sm-3 col-12"></div>
+
+  <div class="col-sm-6 col-12 my-2">
+    <a href="#" class="btn" style="font-size: 1.1rem" disabled>Title: {{ foliox.foliotitle}}</a>
+  </div>
+  <div class="col-sm-3 col-12"></div>
+
 </div>
+<div class="row my-3">
+  <div class="col-sm-3 col-12"></div>
+  
  <div class="col-sm-2 col-4 my-2">
    <a href="/listofdocuments" class="btn btn-warning">back to list</a>
  </div>
@@ -16,11 +22,11 @@
   <a class="btn btn-info" href="/allcommentsforfolio/{{ foliox._id}}">All comments</a>
 
       </div>
-      <div class="col-sm-2 col-12"></div>
+      <div class="col-sm-3 col-12"></div>
 </div>
 
 <div class="row mb-3">
-  <div class="col-sm-2 col-12"></div>
+  <div class="col-sm-3 col-12"></div>
   <div class="col-sm-8 col-12">
 
     <form class="form-inline" method="POST" action="/commentthispage">
