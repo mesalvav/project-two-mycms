@@ -1,20 +1,48 @@
-<h1>List of Documents </h1>
-<h4> ALL ROLES </h4>
+<div class="row">
+  <div class="col-sm-12 d-flex justify-content-center">
+    <h2>List of Documents </h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12 d-flex justify-content-center">
 
 <nav class="navbar navbar-light bg-light">
   <form class="form-inline" method="POST" action="/listofdocumentswithsearch">
-    <input name="termtosearch" class="form-control mr-sm-2" type="search" placeholder="exact Search in title or description" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <input name="termtosearch" class="form-control mr-sm-2" type="search" placeholder="term to Search" aria-label="Search">
+    <button class="btn btn-outline-success ml-sm-3" type="submit">Search</button>
+     <a class="btn btn-outline-warning mx-5 my-4" href="/listofdocuments" >Reset</a>
   </form>
-  <a href="/listofdocuments">Reset search</a>
 </nav>
 
-<div>
-  {{#each allFolios}}
-    <div> <a href="/viewfolio/{{ this._id }}/1"> Title: {{this.foliotitle}}</a> </div>
-    <div>Description: {{this.foliodescription }}</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8 ">
+
+  <table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>   
+    </tr>
+  </thead>
+  <tbody>
+    {{#each allFolios}}
+    <tr>
+      <td><a href="/viewfolio/{{ this._id }}/1">{{this.foliotitle}}</a></td>
+      <td><a href="/viewfolio/{{ this._id }}/1">{{this.foliodescription }}</a> </td>
+    </tr>
+      {{else}}
+    <div>No results for Search!</div>
+    {{/each}}
     
-    <hr>
-  {{/each}}
+  </tbody>
+</table>
+</div>
+  <div class="col-sm-2"></div>
+
 </div>
 
