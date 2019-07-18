@@ -1,4 +1,54 @@
-<h1>NODEMAILER</h1>
+
+<div class="row">
+
+<div class="col-12">
+      <img src="/images/skydawn.jpeg" class="imageLogSignup"  alt="">
+
+ </div>
+</div>
+
+<div class="row aboveForm"></div>
+<div class="row">
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
+  
+<h1>NODEMAILER</h1> 
+<form action="/sendfoliobyemail" method="POST">
+<div>
+
+  <label for="">Email: &nbsp;&nbsp;</label>
+  <input type="email" name="email" id="">
+</div>
+<div>
+
+  <label for="">Subject: </label>
+  <input type="text" name="subject" id="" value="{{ emailx.subject}}" style="width: 220px">
+</div>
+<div>
+
+  <label for="">Message: </label>
+  <textarea type="text" name="message" id="" rows="5" cols="70" >
+    {{emailx.clickthis}} : {{ emailx.urllink}}
+  </textarea>
+</div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+  <a href="/viewfolio/{{ foliox._id }}/1"> Back to folio: {{foliox.foliotitle}}</a
+</form>
+
+  
+ 
+</div>
+<div class="col-sm-4">
+  
+</div>
+
+</div>
+
+
+
+{{!-- =======++++===== --}}
+
+{{!-- <h1>NODEMAILER</h1> 
 <form action="/sendfoliobyemail" method="POST">
 <div>
 
@@ -18,4 +68,4 @@
   </textarea>
 </div>
   <button type="submit">Submit</button>
-</form>
+</form> --}}

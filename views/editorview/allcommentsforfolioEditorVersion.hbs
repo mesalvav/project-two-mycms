@@ -1,3 +1,54 @@
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <a href="/viewfolio/{{ foliox._id }}/1"> BACK to folio </a> <a href="/listofdocuments"> | Back ALL Folios</a> 
+<h2>Comments for Folio: <a href="/viewfolio/{{ foliox._id}}/1">{{ foliox.foliotitle}}</a> </h2>
+
+  </div>
+
+  <div class="col-sm-2"></div>
+  
+</div>
+
+{{#if filteredComments}}
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8 ">
+
+  <table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Page#</th>
+      <th scope="col">Comment</th>   
+    </tr>
+  </thead>
+  <tbody>
+{{/if}}
+    {{#each filteredComments}}
+    <tr>
+      <td>{{pagenumber}}</td>
+      <td>{{ commentcontent }}</td>
+    </tr>
+      {{else}}
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+          <h3>Comments not Found!</h3>
+          <a href="/viewfolio/{{ folioid }}/1"> BACK to folio</a>
+        </div>
+      </div>
+     
+    {{/each}}
+    
+  </tbody>
+</table>
+</div>
+  <div class="col-sm-2"></div>
+
+</div>
+
+{{!-- 
+<h1>====== +++++ ===</h1>
 <a href="/listofdocuments">Back ALL Folios</a> 
 <h1>all comments for folio page : <a href="/viewfolio/{{ foliox._id}}/1">{{ foliox.foliotitle}}</a> </h1>
 
@@ -14,4 +65,4 @@
 {{#if noComments}}
   <h3>Comments not Found!</h3>
   <a href="/viewfolio/{{ folioid }}/1"> BACK to folio</a>
-{{/if}}
+{{/if}} --}}

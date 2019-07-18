@@ -71,7 +71,7 @@ guestRoutes.get("/emailform/:folioid", ensureLogin.ensureLoggedIn(), (req, res) 
     let urllink = foliox.foliopath;
     let emailx = {subject: subject, clickthis: clickthis, urllink: urllink};
 
-    res.render("guestview/emailform", {emailx: emailx});
+    res.render("guestview/emailform", {emailx: emailx, foliox:foliox});
   })
   .catch(err=>{
     console.log("errores from GET /emailform/:folioid  "+ err);
