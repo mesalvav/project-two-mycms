@@ -10,9 +10,7 @@
   <title>{{title}}</title>
   <!-- icons -->
   <script src="https://kit.fontawesome.com/8ae8125fb4.js"></script>
-    {{!-- <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css"> --}}
-    {{!-- <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css"> --}}
-
+   
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body id="bodyLayout">
@@ -26,17 +24,28 @@
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
                         &nbsp;&nbsp;&nbsp;
-                        <li class="nav-item"><a class="nav-link" href="/listofdocuments"><span class="fas fa-list"></span>&nbsp;List of Documents</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/uploadDocuments"><span class="fas fa-cloud-upload-alt"></span>&nbsp;Upload a Document</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/adminlistofusers"><span class="fas fa-tools"></span>&nbsp;Admin Dashboard</a></li>
-                    
-                </ul>
-                <ul class="navbar-nav ">
+                        {{#if userIsAuth}}
                         
+                        <li class="nav-item"><a class="nav-link" href="/listofdocuments"><span class="fas fa-list"></span>&nbsp;List of Documents</a></li>
+                        {{/if}}
+                        {{#if roleAdminOrEditor}}
+                        <li class="nav-item"><a class="nav-link" href="/uploadDocuments"><span class="fas fa-cloud-upload-alt"></span>&nbsp;Upload a Document</a></li>
+                        {{/if}}
+                        {{#if roleAdmin}}
+                        <li class="nav-item"><a class="nav-link" href="/adminlistofusers"><span class="fas fa-tools"></span>&nbsp;Admin Dashboard</a></li>
+                        {{/if}}
+                </ul>
+                
+                <ul class="navbar-nav ">
+                        {{#if userIsAuth}}
+                        <li class="nav-item"><a class="nav-link" href="#">Username: {{currentUser.username}} Role: {{currentUser.role}}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/logout"><span class="fas fa-sign-out-alt"></span>Log Out</a></li>
+                        {{else}}
                         <li class="nav-item"><a class="nav-link" href="/signup"><span class="fas fa-user-plus"></span>Sign Up</a></li>
                         <li class="nav-item"><a class="nav-link" href="/login"><span class="fas fa-sign-in-alt"></span>Log In</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/logout"><span class="fas fa-sign-out-alt"></span>Log Out</a></li>
-                      
+                        {{/if}}
+                       
+                        
                 </ul>
 
                 {{!-- <span class="navbar-text ml-auto">
@@ -50,28 +59,12 @@
     </nav>
 
  
-    
-
-  {{!-- <h4>
-    <a href="/adminlistofusers">TO list of users ADMIN</a> <span> |&nbsp;|</span>
-    <a href="/uploadDocuments">TO upload Documents ADMIN and EDITOR</a> <span> |&nbsp;|</span>
-    <a href="/listofdocuments">TO list of Documents ALL ROLES</a> <span> |&nbsp;|</span>
-  </h4> --}}
   <div class="navbarSpace"></div>
   <div class="container-fluid">
 
      {{{body}}}
   </div>
   
- 
-  
-  {{!-- <h3>
-    <a href="/logout">Log OUT</a> <span> |&nbsp;|</span>
-     <a href="/login">TO Login</a> <span> |&nbsp;|</span>
-      <a href="/signup">TO sign up</a> <span> |&nbsp;|</span>
-      <a href="/">TO HOME page</a> <span> |&nbsp;|</span>
-
-    </h3> --}}
   {{!-- {{#if message}}
     <div class="alert alert-danger" role="alert">{{ message }}</div>
   {{/if}}  --}}

@@ -99,13 +99,25 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// app.use((req, res, next) => {
-//   res.locals.currentUser = req.user;
-//   res.locals.message = req.flash('error');
-//   // res.locals.yay = req.flash('success');
+app.use((req, res, next) => {
+  res.locals.userIsAuth = req.isAuthenticated();
+  res.locals.currentUser = req.user;
+  res.locals.roleGuest = false;
+  if(req.user){
+
+    console.log("from middleware: " + req.user.role);
+    if (req.user.role === "ADMIN"){
+      res.locals.roleAdmin = true;
+    }
+    if (req.user.role === "ADMIN" || req.user.role === "EDITOR"){
+      res.locals.roleAdminOrEditor = true;
+    }
+  }
+  // res.locals.message = req.flash('error');
+  // res.locals.yay = req.flash('success');
   
-//   next();
-// });
+  next();
+});
 
 const indexMain = require('./routes/index');
 app.use('/', indexMain);
